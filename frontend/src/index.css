@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #333;
+  text-align: center;
+  font-family: "Geist", serif;
+}
+
+/* Navbar */
+.navbar {
+  padding: 10px 20px;
+  border: 1px solid #c6c6c6;
+}
+
+.navbar img {
+  image-rendering: optimizeQuality;
+  width: 15%;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Input Container */
+.input-container {
+  padding: 20px;
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  justify-content: center;
+  border: 1px solid #c6c6c6;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+input {
+  font-family: "Geist", serif;
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  font-family: "Geist", serif;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #f2610d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f0762f;
+}
+
+/* Hero Section */
+.hero-section {
+  margin-top: 20px;
+}
+
+/* Leaderboard Table */
+.leaderboard {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  font-size: 16px;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Table Cells */
+.leaderboard th,
+.leaderboard td {
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+}
+
+.leaderboard th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.leaderboard tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.leaderboard tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Scrollable Table Wrapper for Small Screens */
+.table-container {
+  overflow-x: auto; /* Allows horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling for touch devices */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column; /* Stack items vertically */
+    text-align: center;
+  }
+
+  .navbar img {
+    width: 30%; /* Resize logo for smaller screens */
+  }
+
+  .input-container {
+    flex-direction: column; /* Stack input and button vertically */
+    width: 100%; /* Adjust width */
+    padding: 10px;
+  }
+
+  input {
+    margin-right: 0; /* Remove right margin for stacked layout */
+    margin-bottom: 10px; /* Add spacing between input and button */
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  button {
+    width: 100%; /* Full width for smaller screens */
+  }
+
+  .leaderboard {
+    font-size: 14px; /* Reduce font size for smaller screens */
+  }
+}
