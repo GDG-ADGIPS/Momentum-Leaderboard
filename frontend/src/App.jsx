@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { fetchLeaderboard, addUser } from "./api";
-import logo1 from "./assets/logo.png";
-import logo2 from "./assets/logo2.png";
 function App() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [leetcodeID, setLeetcodeID] = useState("");
@@ -43,8 +41,18 @@ function App() {
     <div className="App">
       <div className="navbar">
         <div className="container flex">
-          <h1>Momentum</h1>
-          <h3>100 Days of DSA Sprint</h3>
+          <div>
+            <h1>Momentum</h1>
+            <span style={{ color: "grey" }}>100 Days of DSA Sprint</span>
+          </div>
+          <button
+            onClick={() => {
+              window.location.href =
+                "https://gdg-adgips.github.io/Momentum-100-Days-of-DSA-Sprint/";
+            }}
+          >
+            Daily Questions
+          </button>
         </div>
       </div>
       <div className="container">
