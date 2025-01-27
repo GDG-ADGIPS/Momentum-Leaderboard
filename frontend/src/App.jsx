@@ -11,6 +11,7 @@ function App() {
     const loadLeaderboard = async () => {
       try {
         const data = await fetchLeaderboard();
+        console.log(data);
         setLeaderboard(data);
       } catch (err) {
         console.error(err);
