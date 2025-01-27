@@ -10,23 +10,56 @@ router.get("/add", async (req, res) => {
     return res.status(400).json({ message: "Username is required" });
   }
 
-  try {
-    const response = await axios.get(
-      `https://alfa-leetcode-api.onrender.com/${username}/solved`
-    );
-    const { solvedProblem } = response.data; // Extract 'solvedProblem' field
+  const query = `
+    query getUserProfile($username: String!) {
+      matchedUser(username: $username) {
+        submitStatsGlobal {
+          acSubmissionNum {
+            count
+          }
+        }
+      }
+    }
+  `;
 
-    if (!solvedProblem) {
+  const variables = {
+    username: username,
+  };
+
+  try {
+    const response = await axios.post(
+      "https://leetcode.com/graphql/",
+      {
+        query: query,
+        variables: variables,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    // Log the full response for debugging
+    console.log("Full API Response:", JSON.stringify(response.data, null, 2));
+
+    // Extract the first item from acSubmissionNum array (change index if needed)
+    const solvedProblem =
+      response.data.data.matchedUser?.submitStatsGlobal?.acSubmissionNum[0]
+        ?.count;
+
+    if (solvedProblem === null || solvedProblem === undefined) {
       return res.status(500).json({
         message: "Invalid API response",
-        error: "Missing 'solvedProblem' in API response",
+        error: "Missing 'acSubmissionNum' in API response",
+        response: response.data, // Include the full response for debugging
       });
     }
 
-    // Check if user already exists
+    // Check if the user already exists
     let user = await User.findOne({ leetcodeID: username });
     if (user) {
-      user.questionsSolved = solvedProblem; // Update the specific value
+      user.questionsSolved = solvedProblem; // Update the number of solved questions
       await user.save();
       return res
         .status(200)
